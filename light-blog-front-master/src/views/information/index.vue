@@ -1,14 +1,14 @@
 <template>
-  <div class="container" style="background-color: #ffffff">
-    <div class="row blog-wrapper">
+  <div class="container" style="background-color: transparent">
+    <div class="">
+      <div class="introduction-wrapper">
+        <lb-introduction :blog-id="blogId"/>
+      </div>
       <div class="article-wrapper">
         <lb-article :blog-id="blogId"/>
       </div>
-      <div class="comment-box-wrapper">
-        <lb-comment-box :blog-id="blogId"/>
-      </div>
-      <div class="comment-wrapper">
-        <lb-comment :blog-id="blogId"/>
+      <div class="map-wrapper">
+        <lb-googlemap :blog-id="blogId"/>
       </div>
     </div>
     <lb-footer/>
@@ -17,15 +17,15 @@
 
 <script>
 import article from './components/Article';
-import comment from './components/Comment';
-import commentBox from './components/CommentBox';
+import map from './components/Googlemap';
 import footer from './components/Footer';
 
+import introduction from './components/Introduction';
 export default {
   components: {
+    lbIntroduction: introduction,
     lbArticle: article,
-    lbComment: comment,
-    lbCommentBox: commentBox,
+    lbGooglemap: map,
     lbFooter: footer
   },
   props: {
@@ -43,37 +43,11 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  padding-top: 72px;
-  height: 100vh;
-
-  @media (min-width: 960px) {
-    .blog-wrapper {
-      margin: 0 auto;
-      padding: 40px 20px 20px 20px;
-      max-width: 720px;
-      width: 90%;
-    }
-  }
-
-  @media (max-width: 960px) {
-    .blog-wrapper {
-      margin: 0 auto;
-      padding: 40px 0px 20px 0px;
-      width: 100%;
-    }
-  }
-
+  padding-top: 100px;
+  height: 200vh;
   .article-wrapper {
     width: 100%;
-    margin-bottom: 1.25rem;
-  }
-
-  .comment-box-wrapper {
-    width: 100%;
-  }
-
-  .comment-wrapper {
-    width: 100%;
+    margin-bottom: 0px;
   }
 }
 </style>

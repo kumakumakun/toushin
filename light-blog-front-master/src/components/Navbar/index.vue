@@ -1,17 +1,18 @@
 <template>
   <nav
     ref = "nav"
-    class="navbar navbar-expand-lg navbar-light fixed-top"
-    style="background-color: rgb(255,255,255); ; z-index: 999">
+    class="navbar navbar-expand-lg navbar-light fixed-top "
+    :class="{ 'navbar-hidden': navbarHidden }"
+    style="background-color: transparent; z-index: 999">
     <div class="container">
       <div>
         <a class="navbar-brand" href="" style="color: #ea6f5a; font-weight: bold">
           <img :src="require('@/assets/imgs/34c34f49-8927-47ed-b140-32650f0d55c7.png')" alt="11" style="width: 50px; height: 50px;">
           東進ソリューションズ㍿
-          </a>
-      <button class="navbar-toggler" style="outline: none" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-        <span class="navbar-toggler-icon"/>
-      </button>
+        </a>
+        <button class="navbar-toggler" style="outline: none" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+          <span class="navbar-toggler-icon"/>
+        </button>
       </div>
       <div id="navbarResponsive" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto text-center">
@@ -65,30 +66,37 @@
 export default {
   data() {
     return {
-      keyword: ""
+      keyword: "",
+      navbarHidden: false,
+      lastScrollTop: 0,
     };
   },
   computed: {
     currPage() {
       return this.$root.state.currPage;
     }
-  }
-  // ,
-  // methods: {
-  //   handleSearch() {
-  //     if (this.currPage !== "home") this.$router.push("/home");
-  //     const state = this.$root.state.blogListState; // 通过该变量防止先按关键字搜索后按关键词搜索，然后又按相同关键字搜索时页面不刷新问题
-  //     if (state !== 2 && state !== -2) {
-  //       // 如果前面不是按关键字搜索的话
-  //       this.$root.state.keyword = this.keyword;
-  //       this.$root.state.blogListState = 2;
-  //     } else if (this.keyword !== this.$root.state.keyword) {
-  //       // 如果前面是按关键字搜索的且现在关键字改变了，通过置反blogListState触发computed
-  //       this.$root.state.blogListState = -state;
-  //       this.$root.state.keyword = this.keyword;
-  //     }
-  //   }
-  // }
+  },
+  created() {
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll,{ passive: true });
+  },
+  methods: {
+    handleScroll() {
+      console.log('Scrolling');
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop > this.lastScrollTop) {
+        // 向下滚动，隐藏导航栏
+        this.navbarHidden = true;
+      } else {
+        // 向上滚动，显示导航栏
+        this.navbarHidden = false;
+      }
+      
+      this.lastScrollTop = scrollTop;
+    },
+  },
 }
 </script>
 
@@ -100,15 +108,25 @@ export default {
 }
 
 .nav-link {
-  color:white !important;
+  font-weight: bold;
+  color:#25a0b6a9 !important;
 }
 
 .nav-link:hover {
+  border-color: #000000;
+  background-color: #25a0b6a9;
+  border-radius: 30px;
+  box-shadow: 0 0 5px rgb(167, 166, 166);
+  color: rgb(228, 231, 229) !important;
   cursor: pointer;
 }
 
 .active .nav-link {
-  color: #ea6f5a !important;
+  border-color: #000000;
+  background-color: #25a0b6a9;
+  border-radius: 30px;
+  box-shadow: 0 0 5px rgb(167, 166, 166);
+  color: rgb(228, 231, 229) !important;
 }
 
 .active .nav-link:hover {
@@ -120,7 +138,17 @@ a:hover {
 }
 
 .container {
-  background-color: #91C944;
+  /* background-color: #91C944; */
+  background-color: rgb(228, 231, 229);
   border-radius: 30px;
+  box-shadow: 0 0 3px rgb(78, 76, 76);
+}
+.navbar {
+  /* 导航栏样式 */
+  transition: transform 0.3s ease; /* 添加平滑的过渡效果 */
+}
+
+.navbar-hidden {
+  transform: translateY(-100%); /* 将导航栏向上滑动隐藏 */
 }
 </style>

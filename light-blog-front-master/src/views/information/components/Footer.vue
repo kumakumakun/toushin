@@ -19,13 +19,13 @@ export default {
   */
   @media (min-width: 960px) {
     footer {
-      background-color: white;
-
+      background-color: transparent;
+      color: white;
       div {
         text-align: center;
 
         p {
-          color: #c8c8c8;
+          color: white;
           font-size: 1rem;
           margin-top: 1rem;
           margin-bottom: 1rem;

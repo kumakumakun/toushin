@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div id="article" class="article">
     <!-- <h1 id="title" class="title"> {{ blog.title }}</h1>

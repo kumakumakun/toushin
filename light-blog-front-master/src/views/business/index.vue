@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="background-color: #ffffff">
+  <div class="container" style="background-color: transparent">
     <div class="row blog-wrapper">
       <div class="article-wrapper">
         <lb-article :blog-id="blogId"/>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import 'animate.css';
+import { Scrollama } from 'vue-scrollama';
 import article from "./components/Article";
 import comment from "./components/Comment";
 import commentBox from "./components/CommentBox";
@@ -45,6 +47,7 @@ export default {
 .container {
   padding-top: 72px;
   height: 100vh;
+  background-color: transparent;
 
   @media (min-width: 960px) {
     .blog-wrapper {
@@ -52,28 +55,10 @@ export default {
       padding: 40px 20px 20px 20px;
       max-width: 720px;
       width: 90%;
+      background-color: transparent;
     }
   }
+ 
 
-  @media (max-width: 960px) {
-    .blog-wrapper {
-      margin: 0 auto;
-      padding: 40px 0px 20px 0px;
-      width: 100%;
-    }
-  }
-
-  .article-wrapper {
-    width: 100%;
-    margin-bottom: 1.25rem;
-  }
-
-  .comment-box-wrapper {
-    width: 100%;
-  }
-
-  .comment-wrapper {
-    width: 100%;
-  }
 }
 </style>

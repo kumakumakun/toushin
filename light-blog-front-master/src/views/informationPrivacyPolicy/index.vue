@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="background-color: #ffffff">
+  <div class="container" >
     <div class="row blog-wrapper">
       <div class="article-wrapper">
         <lb-article :blog-id="blogId"/>
